@@ -29,6 +29,18 @@ public interface IMCBackpackDB {
      * @return A {@link CompletableFuture} containing the {@link BackpackData} if found, or null if not present.
      */
     CompletableFuture<BackpackData> open(String uuid);
+
+    /**
+     * Loads backpack data with player tracking.
+     * Default implementation gracefully delegates to the original method.
+     *
+     * @param uuid       The unique identifier of the backpack to load.
+     * @param playerUuid The unique identifier of the acting player.
+     * @return A {@link CompletableFuture} containing the {@link BackpackData} if found.
+     */
+    default CompletableFuture<BackpackData> open(String uuid, String playerUuid) {
+        return open(uuid);
+    }
     
     /**
      * Updates the password hash for a specific backpack.
@@ -74,6 +86,19 @@ public interface IMCBackpackDB {
      * @return A {@link CompletableFuture} representing the completion of the save operation.
      */
     CompletableFuture<Void> save(String uuid, String contentBase64);
+
+    /**
+     * Saves the serialized inventory content with player tracking.
+     * Default implementation gracefully delegates to the original method.
+     *
+     * @param uuid          The unique identifier of the backpack.
+     * @param contentBase64 The Base64 encoded string representing the inventory's contents.
+     * @param playerUuid    The unique identifier of the acting player.
+     * @return A {@link CompletableFuture} representing the completion of the save operation.
+     */
+    default CompletableFuture<Void> save(String uuid, String contentBase64, String playerUuid) {
+        return save(uuid, contentBase64);
+    }
 
     /**
      * Updates the texture string for a specific backpack.
