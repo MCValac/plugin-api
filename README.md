@@ -9,7 +9,7 @@ It uses `CompletableFuture` to ensure non-blocking database operations for backp
 
 - **Group:** `io.github.mcvalac`  
 - **Artifact:** `MCBackpackAPI`  
-- **Version:** `2026.0.5-2` 
+- **Version:** `2026.0.5-2`
 
 ---
 
@@ -183,8 +183,10 @@ CompletableFuture<BackpackData> open(String uuid);
 CompletableFuture<BackpackData> open(String uuid, String playerUuid);
 CompletableFuture<Void> save(String uuid, String contentBase64);
 CompletableFuture<Void> save(String uuid, String contentBase64, String playerUuid);
-CompletableFuture<Boolean> setPassword(String uuid, String password);
-CompletableFuture<Boolean> verifyPassword(String uuid, String password);
+CompletableFuture<Void> setPwd(String uuid, String pwdHash);
+CompletableFuture<Boolean> checkPwd(String uuid, String inputHash);
+CompletableFuture<Void> changePwd(String uuid, String newHash);
+CompletableFuture<Boolean> deletePwd(String uuid, String inputHash);
 ```
 
 </details>
