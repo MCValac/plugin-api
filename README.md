@@ -9,7 +9,7 @@ It uses `CompletableFuture` to ensure non-blocking database operations for backp
 
 - **Group:** `io.github.mcvalac`  
 - **Artifact:** `MCBackpackAPI`  
-- **Version:** `2026.0.5-1` 
+- **Version:** `2026.0.5-2`
 
 ---
 
@@ -36,7 +36,7 @@ It uses `CompletableFuture` to ensure non-blocking database operations for backp
 <dependency>
   <groupId>io.github.mcvalac</groupId>
   <artifactId>MCBackpackAPI</artifactId>
-  <version>2026.0.5-1</version>
+  <version>2026.0.5-2</version>
 </dependency>
 ```
 
@@ -81,7 +81,7 @@ repositories {
 #### 2. Add Dependency
 ```groovy
 dependencies {
-    implementation 'io.github.mcvalac:MCBackpackAPI:2026.0.5-1'
+    implementation 'io.github.mcvalac:MCBackpackAPI:2026.0.5-2'
 }
 ```
 
@@ -115,7 +115,7 @@ repositories {
 #### 2. Add Dependency
 ```kotlin
 dependencies {
-    implementation("io.github.mcvalac:MCBackpackAPI:2026.0.5-1")
+    implementation("io.github.mcvalac:MCBackpackAPI:2026.0.5-2")
 }
 ```
 
@@ -183,8 +183,10 @@ CompletableFuture<BackpackData> open(String uuid);
 CompletableFuture<BackpackData> open(String uuid, String playerUuid);
 CompletableFuture<Void> save(String uuid, String contentBase64);
 CompletableFuture<Void> save(String uuid, String contentBase64, String playerUuid);
-CompletableFuture<Boolean> setPassword(String uuid, String password);
-CompletableFuture<Boolean> verifyPassword(String uuid, String password);
+CompletableFuture<Void> setPwd(String uuid, String pwdHash);
+CompletableFuture<Boolean> checkPwd(String uuid, String inputHash);
+CompletableFuture<Void> changePwd(String uuid, String newHash);
+CompletableFuture<Boolean> deletePwd(String uuid, String inputHash);
 ```
 
 </details>
