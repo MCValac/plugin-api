@@ -25,23 +25,23 @@ public interface IMCBackpackProvider {
 
     /**
      * Retrieves the data for an existing backpack.
+     * Default implementation delegates to the player-tracked open method with a null player.
      *
      * @param uuid The unique identifier of the backpack.
      * @return A {@link CompletableFuture} containing the {@link BackpackData} if found.
      */
-    CompletableFuture<BackpackData> open(String uuid);
+    default CompletableFuture<BackpackData> open(String uuid) {
+        return open(uuid, null);
+    }
 
     /**
      * Retrieves the data for an existing backpack with player tracking.
-     * Default implementation delegates to the legacy open method.
      *
      * @param uuid       The unique identifier of the backpack.
      * @param playerUuid The unique identifier of the player opening the backpack.
      * @return A {@link CompletableFuture} containing the {@link BackpackData} if found.
      */
-    default CompletableFuture<BackpackData> open(String uuid, String playerUuid) {
-        return open(uuid);
-    }
+    CompletableFuture<BackpackData> open(String uuid, String playerUuid);
 
     /**
      * Sets a password for a backpack.
@@ -81,25 +81,25 @@ public interface IMCBackpackProvider {
 
     /**
      * Persists the current inventory state of a backpack.
+     * Default implementation delegates to the player-tracked save method with a null player.
      *
      * @param uuid          The unique identifier of the backpack.
      * @param contentBase64 The serialized inventory data.
      * @return A {@link CompletableFuture} that completes when the data is saved.
      */
-    CompletableFuture<Void> save(String uuid, String contentBase64);
+    default CompletableFuture<Void> save(String uuid, String contentBase64) {
+        return save(uuid, contentBase64, null);
+    }
 
     /**
      * Persists the current inventory state of a backpack with player tracking.
-     * Default implementation delegates to the legacy save method.
      *
      * @param uuid          The unique identifier of the backpack.
      * @param contentBase64 The serialized inventory data.
      * @param playerUuid    The unique identifier of the player saving the backpack.
      * @return A {@link CompletableFuture} that completes when the data is saved.
      */
-    default CompletableFuture<Void> save(String uuid, String contentBase64, String playerUuid) {
-        return save(uuid, contentBase64);
-    }
+    CompletableFuture<Void> save(String uuid, String contentBase64, String playerUuid);
 
     /**
      * Updates the texture of a backpack.
